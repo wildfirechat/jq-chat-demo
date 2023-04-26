@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+    <link rel="stylesheet" href="./src/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>登录页</h1>
+        <form id="login-form">
+            <label for="phone">手机号码：</label>
+            <input type="tel" id="phone" name="phone" required>
+            <button id="send-code-button">获取验证码</button>
+            <br>
+            <label for="code">验证码：</label>
+            <input type="text" id="code" name="code" required>
+            <br>
+            <button type="submit">登录</button>
+        </form>
+    </div>
+
+    <script src="./dist/main.js"></script>
+</body>
+
+</html>
