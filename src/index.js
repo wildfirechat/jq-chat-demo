@@ -7,11 +7,27 @@ import TextMessageContent from "./wfc/messages/textMessageContent";
 import Conversation from "./wfc/model/conversation";
 import ConversationType from "./wfc/model/conversationType";
 import {stringValue} from "./wfc/util/longUtil";
+import ConnectionStatus from "./wfc/client/connectionStatus";
 
 wfc.init();
 wfc.eventEmitter.on(EventType.ReceiveMessage, (msg, hasMore) => {
     $("#console").text("收到消息" + JSON.stringify(msg));
 })
+wfc.eventEmitter.on(EventType.ConnectionStatusChanged, status => {
+    if (status === ConnectionStatus.ConnectionStatusConnected) {
+        $('#login-form').hide()
+        $('#action-container').show();
+        $('#console').text('连接成功 ' + status);
+    } else if ([ConnectionStatus.ConnectionStatusConnecting, ConnectionStatus.ConnectionStatusReceiveing].indexOf(status) === -1) {
+        $('#console').text('连接失败 ' + status);
+    }
+})
+
+let userId = localStorage.getItem("userId");
+let token = localStorage.getItem("token");
+if (userId && token) {
+    wfc.connect(userId, token);
+}
 
 $("#send-code-button").click(function (event) {
     event.preventDefault();
@@ -64,10 +80,8 @@ $("#login-form").submit(function (event) {
             //window.location.href = "/home";
             const {userId, token, portrait} = response.result;
             wfc.connect(userId, token);
-            $('#login-form').hide()
-            $('#action-container').show();
-            // setItem('userId', userId);
-            // setItem('token', token);
+            localStorage.setItem('userId', userId);
+            localStorage.setItem('token', token);
             // setItem("userPortrait", portrait);
         },
         error: function (xhr, status, error) {
@@ -92,5 +106,5 @@ $("#send-msg-button").click(function () {
 });
 $("#get-conversation-list-button").click(function () {
     let conversationList = wfc.getConversationList([0, 1, 2], [0, 1])
-    $("#console").text("会话列表" +  JSON.stringify(conversationList));
+    $("#console").text("会话列表" + JSON.stringify(conversationList));
 });
