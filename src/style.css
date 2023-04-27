@@ -4,8 +4,9 @@ body {
     background-image: linear-gradient(to bottom right, #4f86c6, #a5d8f3);
 }
 
-.container {
+.login-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -80,4 +81,13 @@ input[type="text"] {
 
 .submit-button:hover {
     background-color: #d32f2f;
+}
+
+.action-container {
+    display: none;
+}
+
+.console-container{
+    width: 100%;
+    height: 300px;
 }

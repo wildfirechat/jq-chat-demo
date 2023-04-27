@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>登录页</title>
+    <title>野火IM jQuery demo</title>
     <link rel="stylesheet" href="./src/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <h1>登录页</h1>
+    <div class="login-container">
+        <h1>野火IM</h1>
         <form id="login-form">
             <label for="phone">手机号码：</label>
             <input type="tel" id="phone" name="phone" required>
@@ -21,6 +21,12 @@
             <br>
             <button type="submit">登录</button>
         </form>
+        <div id="action-container" class="action-container">
+            <button id="get-user-info-button">获取自己的用户信息</button>
+            <button id="send-msg-button">给小火发消息</button>
+            <button id="get-conversation-list-button">获取会话列表</button>
+        </div>
+        <div id="console" class="console-container"></div>
     </div>
 
     <script src="./dist/main.js"></script>
